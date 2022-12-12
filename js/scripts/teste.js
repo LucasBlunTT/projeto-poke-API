@@ -1,3 +1,0 @@
-{
-    const numerr = 322;
-}

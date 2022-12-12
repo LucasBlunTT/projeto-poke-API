@@ -1,1 +1,1 @@
-"use strict";var numerr=322;
+"use strict";var cardPokemon=document.querySelectorAll("js-open-details-pokemon"),btnCloseModal=document.querySelector(".js-close-modal-details-pokemon");function openDetailsPokemon(){document.documentElement.classList.add("open-modal")}function closeDetailsPokemon(){document.documentElement.classList.remove("open-modal")}cardPokemon.forEach(function(e){e.addEventListener("click",openDetailsPokemon)}),btnCloseModal.addEventListener("click",closeDetailsPokemon);
