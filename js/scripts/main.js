@@ -1,4 +1,11 @@
-const cardPokemon = document.querySelectorAll('js-open-details-pokemon');
+// scripts do slide principal
+var slide_hero = new Swiper(".slide-hero", {
+    pagination: {
+      el: ".slide-hero .main-area .area-explore .swiper-pagination",
+    },
+  });
+
+const cardPokemon = document.querySelectorAll('.js-open-details-pokemon');
 const btnCloseModal = document.querySelector('.js-close-modal-details-pokemon')
 
 function openDetailsPokemon() {

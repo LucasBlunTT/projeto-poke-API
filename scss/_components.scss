@@ -203,6 +203,9 @@
     }
 
     &.fire {
+        .icon{
+            color: var(--type-fire);
+        }
         span {
             color: var(--type-fire);
         }
