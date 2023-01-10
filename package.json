@@ -1,5 +1,5 @@
 {
-  "name": "Poke-API",
+  "name": "poke-api",
   "version": "1.0.0",
   "description": "Projeto dedicado à prática dos conceitos de Javascript, conceitos par auma boa estruturação do HTML. O projeto em si se baseia em consultas de API’s para trazer as informações com as quais o usuário interage.",
   "main": "index.js",
