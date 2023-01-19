@@ -297,6 +297,7 @@
                 position: relative;
                 margin-bottom: 5.5rem;
 
+
                 &.active {
                     .item-selected {
                         border-radius: 1rem 1rem 0 0;
@@ -318,6 +319,7 @@
                     border-radius: 1rem;
                     display: flex;
                     align-items: center;
+                    transition: all .3s;
 
                     span {
                         color: #7a7f80;
