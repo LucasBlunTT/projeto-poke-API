@@ -109,7 +109,7 @@ function listingPokemons(urlAPI) {
     })
 }
 
-listingPokemons('https://pokeapi.co/api/v2/pokemon?pokemon?limit=9&offset=0')
+listingPokemons('https://pokeapi.co/api/v2/pokemon?limit=9&offset=0')
 
 function openDetailsPokemon() {
   document.documentElement.classList.add('open-modal');
