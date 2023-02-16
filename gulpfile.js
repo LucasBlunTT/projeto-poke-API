@@ -47,7 +47,7 @@ function gulpJs() {
 // concatenando os plugins JAVASCRIPT em um arquivo plugin.js, para não usar as libs com declaração no HTML
 function pluginsJs() {
     return gulp
-        .src(['./js/lib/aos.min.js', './js/lib/swiper.min.js'])
+        .src(['./js/lib/axios.min.js', './js/lib/swiper.min.js'])
         .pipe(concat('plugins.js'))
         .pipe(gulp.dest('js/'))
         .pipe(browserSync.stream());
