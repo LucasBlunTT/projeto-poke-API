@@ -118,3 +118,69 @@ function openDetailsPokemon() {
 function closeDetailsPokemon() {
   document.documentElement.classList.remove('open-modal');
 }
+
+// Aqui é o Script para listar todos os tipos de pokemon
+
+const areaTypes = document.getElementById("js-type-area")
+const areaTypesMobile = document.querySelector(".dropdown-select")
+
+axios({
+  method: 'GET',
+  url: 'https://pokeapi.co/api/v2/type'
+})
+  .then(response => {
+    const { results } = response.data;
+
+    results.forEach((type, index) => {
+      if (index < 18) {
+        let itemType = document.createElement('li');
+        areaTypes.appendChild(itemType);
+
+        let buttonType = document.createElement('button');
+        buttonType.classList = `type-filter ${type.name}.svg`;
+        itemType.appendChild(buttonType);
+
+        let iconType = document.createElement('div');
+        iconType.classList = 'icon';
+        buttonType.appendChild(iconType);
+
+        let srcType = document.createElement('img');
+        srcType.setAttribute('src', `img/icon-types/${type.name}.svg`);
+        iconType.appendChild(srcType);
+
+        let nameType = document.createElement('span');
+        nameType.textContent = primeiraLEtraMaiuscula(type.name);
+        buttonType.appendChild(nameType);
+
+        // Aqui é o preenchimento do select mobile dos tipos
+
+        let itemTypeMobile = document.createElement('li');
+        areaTypesMobile.appendChild(itemTypeMobile);
+
+        let buttonTypeMobile= document.createElement('button');
+        buttonTypeMobile.classList = `type-filter ${type.name}.svg`;
+        itemTypeMobile.appendChild(buttonTypeMobile);
+
+        let iconTypeMobile = document.createElement('div');
+        iconTypeMobile.classList = 'icon';
+        buttonTypeMobile.appendChild(iconTypeMobile);
+
+        let srcTypeMobile = document.createElement('img');
+        srcTypeMobile.setAttribute('src', `img/icon-types/${type.name}.svg`);
+        iconTypeMobile.appendChild(srcTypeMobile);
+        
+        let nameTypeMobile = document.createElement('span');
+        nameTypeMobile.textContent = primeiraLEtraMaiuscula(type.name);
+        buttonTypeMobile.appendChild(nameTypeMobile);
+      }
+    })
+  })
+
+  /*     <li>
+            <button class="type-filter active">
+                <div class="icon">
+                    <img src="img/icon-all.svg" alt="">
+                </div>
+                <span>All</span>
+            </button>
+        </li>  */
