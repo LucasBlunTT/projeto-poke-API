@@ -176,11 +176,16 @@ axios({
     })
   })
 
-  /*     <li>
-            <button class="type-filter active">
-                <div class="icon">
-                    <img src="img/icon-all.svg" alt="">
-                </div>
-                <span>All</span>
-            </button>
-        </li>  */
+  //Aqui é o script que realiza a funcionalidade do load more
+
+  const btnLoadMore = document.getElementById('js-btn-load-more');
+
+  let countPagination = 10;
+
+  function showMorePokemon(){
+    listingPokemons(`https://pokeapi.co/api/v2/pokemon?pokemon?limit=9&offset=${countPagination}`)
+
+    countPagination = countPagination + 9;
+  }
+
+  btnLoadMore.addEventListener('click', showMorePokemon);
