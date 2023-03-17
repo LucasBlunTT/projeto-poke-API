@@ -138,6 +138,7 @@ axios({
 
         let buttonType = document.createElement('button');
         buttonType.classList = `type-filter ${type.name}.svg`;
+        buttonType.setAttribute('code-type', index)
         itemType.appendChild(buttonType);
 
         let iconType = document.createElement('div');
@@ -157,8 +158,9 @@ axios({
         let itemTypeMobile = document.createElement('li');
         areaTypesMobile.appendChild(itemTypeMobile);
 
-        let buttonTypeMobile= document.createElement('button');
+        let buttonTypeMobile = document.createElement('button');
         buttonTypeMobile.classList = `type-filter ${type.name}.svg`;
+        buttonTypeMobile.setAttribute('code-type', index + 1)
         itemTypeMobile.appendChild(buttonTypeMobile);
 
         let iconTypeMobile = document.createElement('div');
@@ -168,24 +170,105 @@ axios({
         let srcTypeMobile = document.createElement('img');
         srcTypeMobile.setAttribute('src', `img/icon-types/${type.name}.svg`);
         iconTypeMobile.appendChild(srcTypeMobile);
-        
+
         let nameTypeMobile = document.createElement('span');
         nameTypeMobile.textContent = primeiraLEtraMaiuscula(type.name);
         buttonTypeMobile.appendChild(nameTypeMobile);
+
+        const allTypes = document.querySelectorAll('.type-filter');
+
+        allTypes.forEach(btn => {
+          btn.addEventListener('click', filterByTypes)
+        })
       }
     })
   })
 
-  //Aqui é o script que realiza a funcionalidade do load more
+//Aqui é o script que realiza a funcionalidade do load more
 
-  const btnLoadMore = document.getElementById('js-btn-load-more');
+const btnLoadMore = document.getElementById('js-btn-load-more');
 
-  let countPagination = 10;
+let countPagination = 10;
 
-  function showMorePokemon(){
-    listingPokemons(`https://pokeapi.co/api/v2/pokemon?pokemon?limit=9&offset=${countPagination}`)
+function showMorePokemon() {
+  listingPokemons(`https://pokeapi.co/api/v2/pokemon?pokemon?limit=9&offset=${countPagination}`)
 
-    countPagination = countPagination + 9;
+  countPagination = countPagination + 9;
+}
+
+btnLoadMore.addEventListener('click', showMorePokemon);
+
+//Funcao para filtrar os pokemons por tipo
+
+function filterByTypes() {
+  let idPokemon = this.getAttribute('code-type');
+
+  const areaPokemons = document.getElementById('js-list-pokemons');
+  const btnLoadmore = document.getElementById('js-btn-load-more');
+  const countPokemonsType = document.getElementById('js-count-pokemons');
+  const allTypes = document.querySelectorAll('.type-filter');
+
+  areaPokemons.innerHTML = '';
+  btnLoadmore.style.display = "none";
+
+  const sectionPokemons = document.querySelector('.s-all-info-pokemons')
+  const topSection = sectionPokemons.offsetTop;
+
+  window.scrollTo({
+    top: topSection + 288,
+    behavior: 'smooth'
+  })
+
+  allTypes.forEach(type => {
+    type.classList.remove('active');
+  });
+
+  this.classList.add('active');
+
+  if (idPokemon) {
+    axios({
+      method: 'GET',
+      url: `https://pokeapi.co/api/v2/type/${idPokemon}`
+    })
+      .then(response => {
+
+        const { pokemon } = response.data;
+        countPokemonsType.textContent = pokemon.length;
+
+        pokemon.forEach(pok => {
+
+          const { url } = pok.pokemon;
+
+          axios({
+            method: 'GET',
+            url: `${url}`
+          })
+            .then(response => {
+              const { name, id, sprites, types } = response.data;
+
+              const infoCard = {
+                nome: name,
+                code: id,
+                image: sprites.other.dream_world.front_default,
+                type: types[0].type.name
+              }
+
+              if (infoCard.image) {
+                createCardPokemon(infoCard.code, infoCard.type, infoCard.nome, infoCard.image);
+              }
+
+              const cardPokemon = document.querySelectorAll('.js-open-details-pokemon')
+
+              cardPokemon.forEach(card => {
+                card.addEventListener('click', openDetailsPokemon);
+              })
+            })
+        })
+      })
+  } else {
+    areaPokemons.innerHTML = '';
+    listingPokemons('https://pokeapi.co/api/v2/pokemon?limit=9&offset=0')
+    btnLoadmore.style.display = "block";
   }
+}
 
-  btnLoadMore.addEventListener('click', showMorePokemon);
