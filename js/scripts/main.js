@@ -126,6 +126,9 @@ function openDetailsPokemon() {
   const iconTypePokemonModal = document.getElementById('js-image-type-modal');
   const namePokemonModal = document.getElementById('js-name-pokemon-modal');
   const codePokemonModal = document.getElementById('js-code-pokemon-modal');
+  const heightPokemonModal = document.getElementById('js-height-pokemon');
+  const weightPokemonModal = document.getElementById('js-weight-pokemon');
+  const mainAbilitiesPokemonModal = document.getElementById('js-main-abilities');
 
   imgPokemonModal.setAttribute('src', imagePokemon.getAttribute('src'));
   modalDetails.setAttribute('type-pokemon-modal', this.classList[2]);
@@ -139,7 +142,63 @@ function openDetailsPokemon() {
     url: `https://pokeapi.co/api/v2/pokemon/${codePokemon}`
   })
     .then(response => {
-      console.log(response.data);
+      let data = response.data;
+
+      let infoPokemon = {
+        mainAbilities: primeiraLEtraMaiuscula(data.abilities[0].ability.name),
+        types: data.types,
+        weight: data.weight,
+        height: data.height,
+        abilites: data.abilities,
+        stats: data.stats,
+        urlType: data.types[0].type.url
+      }
+
+      function listingTypesPokemon() {
+        const areaTypesModal = document.getElementById('js-types-pokemon');
+        areaTypesModal.innerHTML = ""
+
+        let arrayTypes = infoPokemon.types;
+
+        arrayTypes.forEach(itemType => {
+          let itemList = document.createElement('li');
+          areaTypesModal.append(itemList);
+
+          let spanList = document.createElement('span')
+          spanList.classList = `tag-type ${itemType.type.name}`;
+          spanList.textContent = primeiraLEtraMaiuscula(itemType.type.name);
+          itemList.appendChild(spanList);
+        })
+      }
+
+      function listingWeaknesses() {
+        const areaWeak = document.getElementById('js-area-weak');
+        areaWeak.innerText = "";
+
+        axios({
+          method: 'GET',
+          url: `${infoPokemon.urlType}`
+        }).then(response => {
+          let weaknesses = response.data.damage_relations.double_damage_from;
+
+          weaknesses.forEach(itemType => {
+            let itemListWek = document.createElement('li');
+            areaWeak.append(itemListWek);
+
+            let spanList = document.createElement('span')
+            spanList.classList = `tag-type ${itemType.name}`;
+            spanList.textContent = primeiraLEtraMaiuscula(itemType.name);
+            itemListWek.appendChild(spanList);
+          })
+        })
+      }
+
+      heightPokemonModal.textContent = `${infoPokemon.height / 10}m`;
+      weightPokemonModal.textContent = `${infoPokemon.weight / 10}kg`;
+      mainAbilitiesPokemonModal.textContent = infoPokemon.mainAbilities;
+
+      listingTypesPokemon();
+      listingWeaknesses();
     })
 }
 
@@ -166,7 +225,7 @@ axios({
 
         let buttonType = document.createElement('button');
         buttonType.classList = `type-filter ${type.name}.svg`;
-        buttonType.setAttribute('code-type', index)
+        buttonType.setAttribute('code-type', index + 1)
         itemType.appendChild(buttonType);
 
         let iconType = document.createElement('div');
