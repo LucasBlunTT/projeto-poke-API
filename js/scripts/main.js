@@ -197,6 +197,25 @@ function openDetailsPokemon() {
       weightPokemonModal.textContent = `${infoPokemon.weight / 10}kg`;
       mainAbilitiesPokemonModal.textContent = infoPokemon.mainAbilities;
 
+      const statsHp = document.getElementById('js-stats-hp');
+      statsHp.style.width = `${infoPokemon.stats[0].base_stat}%`;
+
+      const statsAttack = document.getElementById('js-stats-attack');
+      statsAttack.style.width = `${infoPokemon.stats[1].base_stat}%`;
+
+      const statsDefense = document.getElementById('js-stats-defense');
+      statsDefense.style.width = `${infoPokemon.stats[2].base_stat}%`;
+
+      const statsSpAttack = document.getElementById('js-stats-sp-attack');
+      statsSpAttack.style.width = `${infoPokemon.stats[3].base_stat}%`;
+
+      const statsSpDefense = document.getElementById('js-stats-sp-defense');
+      statsSpDefense.style.width = `${infoPokemon.stats[4].base_stat}%`;
+
+      const statsSpeed = document.getElementById('js-stats-speed');
+      statsSpeed.style.width = `${infoPokemon.stats[5].base_stat}%`;
+
+
       listingTypesPokemon();
       listingWeaknesses();
     })
