@@ -10,9 +10,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary Meta Tags -->
+
+    <meta name="title" content="Who is that Pokémon?">
+    <meta name="description"
+        content="Projeto dedicado à prática de Javascript. Além do layout bem trabalhado, o projeto em si se baseia em consultas de API’s para trazer as informações com as quais o usuário interage.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://projeto-pokemon-api.netlify.app/">
+    <meta property="og:title" content="Who is that Pokémon?">
+    <meta property="og:description"
+        content="Projeto dedicado à prática de Javascript. Além do layout bem trabalhado, o projeto em si se baseia em consultas de API’s para trazer as informações com as quais o usuário interage.">
+    <meta property="og:image" content="https://projeto-pokemon-api.netlify.app/cover.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://projeto-pokemon-api.netlify.app/">
+    <meta property="twitter:title" content="Who is that Pokémon?">
+    <meta property="twitter:description"
+        content="Projeto dedicado à prática de Javascript. Além do layout bem trabalhado, o projeto em si se baseia em consultas de API’s para trazer as informações com as quais o usuário interage.">
+    <meta property="twitter:image" content="https://projeto-pokemon-api.netlify.app/cover.png">
+
     <link rel="stylesheet" href="css/plugins.css">
     <link rel="stylesheet" href="css/main.css">
-    <title>Projeto Pokemon</title>
+    <title>Who is that Pokémon?</title>
 </head>
 
 <body>
@@ -111,13 +133,13 @@
                 <div class="left-container">
                     <ul id="js-type-area">
                         <li>
-                            <button class="type-filter active all" code-type=""> 
+                            <button class="type-filter active all" code-type="">
                                 <div class="icon">
                                     <img src="img/icon-all.svg" alt="">
                                 </div>
                                 <span>All</span>
                             </button>
-                        </li>                      
+                        </li>
                     </ul>
                 </div>
                 <div class="right-container">
@@ -126,7 +148,7 @@
                             <img src="img/icon-pokeball.svg" alt="">
                             <span><strong id="js-count-pokemons"> - </strong> Pokémons</span>
                         </div>
-                    </div>    
+                    </div>
                     <div class="select-custom">
                         <button class="item-selected js-open-select-custom">
                             <span>Show:</span>
@@ -140,11 +162,11 @@
                                     </div>
                                     <span>All</span>
                                 </button>
-                            </li>                           
+                            </li>
                         </ul>
-                    </div>                   
+                    </div>
                     <div class="all" id="js-list-pokemons">
-                        <!-- Local onde será inserido o card dos pokemons via API-->                        
+                        <!-- Local onde será inserido o card dos pokemons via API-->
                     </div>
                     <button class="btn-load-more" id="js-btn-load-more">Load more Pokémons</button>
                 </div>
@@ -291,7 +313,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             </div>
         </div>
